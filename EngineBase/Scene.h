@@ -2,16 +2,19 @@
 #define SCENE_H
 
 #include "../DataStructures/LinkedList.h"
+#include "GameObject.h"
 
 class Scene {
+	LinkedList<GameObject&> gameObjects;
 public:
-	// LinkedList<GameObjects> gameObjects;
 	Scene();
-	~Scene();
-	//void RegisterObject(GameObject * object); // Adds a object to the execution queue.
-	//void UnregisterObject(int id); // Remove object from execution queue.
-	//GameObject *GetObjectByID(int id); // Get object from queue with id.
-	//void MainUpdate(); // Runs everything on scene.
+	void OnInit();
+	void OnLoop(); // Runs everything on scene.
+	void OnRender();
+	void OnQuit();
+	GameObject& CreateGameObject(); // Creates and attach the gameObject to the current scene.
+	void DestroyGameObject(GameObject& gameObject);
+	int GetAvailableGameObjectID();
 };
 
 #endif

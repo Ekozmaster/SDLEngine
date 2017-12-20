@@ -1,6 +1,7 @@
 #include"Renderer.h"
-#include<GL/gl.h>
-#include<GL/glu.h>
+#include<GL/glew.h>
+#include"EngineHub.h"
+#include"SceneManager.h"
 
 Renderer::Renderer(){
 	glContext = NULL;
@@ -42,18 +43,22 @@ bool Renderer::Setup(SDL_Window *window){
 }
 
 void Renderer::Render(){
-	glClearColor(0.0, 0.0, 0.0, 1.0);
+	glClearColor(0.4, 0.4, 0.4, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
+
+	((SceneManager*)(EngineHub::Instance().sceneManager))->OnRender();
 
 	//glMatrixMode(GL_MODELVIEW);
 	//glLoadIdentity();
 	//gluLookAt(0.0, 0.0, -0.5, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
+	/*
 	glBegin(GL_TRIANGLES);
 	glVertex3f(-0.5, -0.5, 0);
 	glVertex3f(0.0, 0.5, 0);
 	glVertex3f(0.5, -0.5, 0);
 	glEnd();
+	//*/
 }
 
 void Renderer::Destroy(){

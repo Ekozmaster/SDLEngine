@@ -1,3 +1,4 @@
+#include<GL/glew.h>
 #include"Application.h"
 #include"EngineHub.h"
 #include"Input.h"
@@ -34,6 +35,8 @@ bool Application::OnInit(){
 	SetupSystems();
 	WindowManager *windowManager = (WindowManager*)(EngineHub::Instance().windowManager);
 	if(!windowManager->OnInit()) return false;
+	glewExperimental = GL_TRUE;
+	glewInit();
 	running = true;
 	return true;
 }
@@ -41,7 +44,10 @@ bool Application::OnInit(){
 // This function is called every frame.
 void Application::OnLoop(){
 	((EventHandler*)(EngineHub::Instance().eventManager))->PollEvents();
+	SceneManager *sceneManager = ((SceneManager*)(EngineHub::Instance().sceneManager));
 	WindowManager *windowManager = ((WindowManager*)(EngineHub::Instance().windowManager));
+
+	sceneManager->OnLoop();
 	windowManager->OnLoop();
 	if(!windowManager->IsRunning()){
 		running = false;
@@ -54,6 +60,7 @@ void Application::OnRender(){
 }
 
 void Application::OnQuit(){
+	((SceneManager*)(EngineHub::Instance().sceneManager))->OnQuit();
 	((WindowManager*)(EngineHub::Instance().windowManager))->OnQuit();
 	SDL_Quit();
 }

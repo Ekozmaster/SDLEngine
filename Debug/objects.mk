@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lSDL2 -lGLU -lGL -lSDL2main
+LIBS := -lopengl32 -lmingw32 -lSDL2 -lSDL2main
 

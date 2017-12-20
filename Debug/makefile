@@ -44,7 +44,7 @@ all: SDLEngine
 SDLEngine: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross G++ Linker'
-	g++  -o "SDLEngine" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"E:\E-man\Programas\SDL2-2.0.7\x86_64-w64-mingw32\lib" -L"C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\um\x64" -o "SDLEngine" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
